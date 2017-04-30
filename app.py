@@ -1,5 +1,5 @@
 import json
-from flask import Flask
+from flask import Flask, abort
 import redis
 
 app = Flask(__name__)
@@ -13,4 +13,12 @@ def get(key):
 @app.route('/')
 def hello_world():
     return 'It works'
+
+@app.route('/face/image/<imagename>', methods=["GET"])
+def get_face_by_image(imagename):
+    faces = get(imagename)
+    if faces is None:
+        abort(404)
+
+    return faces
 
