@@ -22,3 +22,11 @@ def get_face_by_image(imagename):
 
     return faces
 
+@app.route('/face/user/<userid>', methods=["GET"])
+def get_face_by_image(userid):
+    faces = get(userid)
+    if faces is None:
+        abort(404)
+
+    return faces
+
