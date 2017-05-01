@@ -8,7 +8,13 @@ r = redis.StrictRedis(host="192.168.99.100")#redis
 
 
 def get(key):
-    return json(str(r.get(key)).split(" ")[1:])
+    value = r.get(key)
+    if value is None:
+        r.set(key, "")
+        return []
+    else:
+        return str(value)[2:-1].split(" ")[1:]
+
 
 @app.route('/')
 def hello_world():
@@ -20,13 +26,12 @@ def get_face_by_image(imagename):
     if faces is None:
         abort(404)
 
-    return faces
+    return str(faces)
 
 @app.route('/face/user/<userid>', methods=["GET"])
-def get_face_by_image(userid):
+def get_face_by_user(userid):
     faces = get(userid)
     if faces is None:
         abort(404)
 
-    return faces
-
+    return str(faces)
