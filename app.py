@@ -3,6 +3,7 @@ from flask import Flask, abort
 import redis
 
 app = Flask(__name__)
+CORS(app)
 
 r = redis.StrictRedis(host="redis")#redis
 
