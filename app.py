@@ -4,7 +4,7 @@ import redis
 
 app = Flask(__name__)
 
-r = redis.StrictRedis(host="192.168.99.100")#redis
+r = redis.StrictRedis(host="redis")#redis
 
 
 def get(key):
@@ -35,3 +35,5 @@ def get_face_by_user(userid):
         abort(404)
 
     return str(faces)
+
+app.run(host= 'face-api', port=5000)
