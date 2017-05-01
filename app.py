@@ -1,6 +1,7 @@
 import json
 from flask import Flask, abort
 import redis
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
 CORS(app)
